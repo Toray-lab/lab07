@@ -1,280 +1,347 @@
 [![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
 [![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
-<фрагмент_вставки_значка>
-# Отчёт к лабораторной работе №3
-Настройка окружения
+!https://app.travis-ci.com/Toray-lab/lab04.svg?token=Lebv9VyVWR2CUJgbvRjy&branch=main!:https://app.travis-ci.com/Toray-lab/lab04
+# Отчёт к лабораторной работе №4
+Устанавливаем переменные окрудения
 ```bash
 $ export GITHUB_USERNAME=Toray-lab
+$ export GITHUB_TOKEN=<токен>
+```
+Переходим в рабочую директорию и активируем окружение:
+```bash
 $ cd ${GITHUB_USERNAME}/workspace
-$ pushd .
-~/Toray-lab/workspace ~/Toray-lab/workspace
 $ source scripts/activate
 ```
-Клонирование lab02 как основы для lab03
+
+Устанавливаем RVM и Ruby
 ```bash
-$ git clone https://github.com/${GITHUB_USERNAME}/lab02.git projects/lab03
-Cloning into 'projects/lab03'...
-remote: Enumerating objects: 10, done.
-remote: Counting objects: 100% (10/10), done.
-remote: Compressing objects: 100% (8/8), done.
-remote: Total 10 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
-Receiving objects: 100% (10/10), 4.60 KiB | 4.60 MiB/s, done.
-Resolving deltas: 100% (1/1), done.
-$ cd projects/lab03
+$ \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+Turning on ignore dotfiles mode.
+Downloading https://github.com/rvm/rvm/archive/master.tar.gz
+Installing RVM to /home/vlad/.rvm/
+Installation of RVM in /home/vlad/.rvm/ is almost complete:
+
+  * To start using RVM you need to run `source /home/vlad/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+Thanks for installing RVM 🙏
+Please consider donating to our open collective to help us maintain RVM.
+
+👉  Donate: https://opencollective.com/rvm/donate
+
+$ echo "source $HOME/.rvm/scripts/rvm" >> scripts/activate
+$ . scripts/activate
+$ rvm autolibs disable
+$ sudo apt install ruby-full ruby-dev build-essential zlib1g-dev
+ruby-dev is already the newest version (1:3.3+b1).
+zlib1g-dev is already the newest version (1:1.3.dfsg+really1.3.1-1+b1).
+Upgrading:
+  dpkg
+
+Installing:
+  build-essential  ruby-full
+
+Installing dependencies:
+  dpkg-dev                   libdpkg-perl
+  fakeroot                   libfakeroot
+  libalgorithm-diff-perl     libfile-fcntllock-perl
+  libalgorithm-diff-xs-perl  ri
+  libalgorithm-merge-perl
+
+Suggested packages:
+  debian-keyring  debian-tag2upload-keyring  bzr
+
+Summary:
+  Upgrading: 1, Installing: 11, Removing: 0, Not Upgrading: 202
+  Download size: 3,747 kB
+  Space needed: 4,699 kB / 13.7 GB available
+
+Continue? [Y/n] Y
+Get:1 http://deb.debian.org/debian trixie/main amd64 dpkg amd64 1.22.22 [1,537 kB]
+Get:2 http://deb.debian.org/debian trixie/main amd64 libdpkg-perl all 1.22.22 [651 kB]
+Get:3 http://deb.debian.org/debian trixie/main amd64 dpkg-dev all 1.22.22 [1,337 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 build-essential amd64 12.12 [4,624 B]
+Get:5 http://deb.debian.org/debian trixie/main amd64 libfakeroot amd64 1.37.1.1-1 [29.6 kB]
+Get:6 http://deb.debian.org/debian trixie/main amd64 fakeroot amd64 1.37.1.1-1 [76.0 kB]
+Get:7 http://deb.debian.org/debian trixie/main amd64 libalgorithm-diff-perl all 1.201-1 [43.3 kB]
+Get:8 http://deb.debian.org/debian trixie/main amd64 libalgorithm-diff-xs-perl amd64 0.04-9 [11.1 kB]
+Get:9 http://deb.debian.org/debian trixie/main amd64 libalgorithm-merge-perl all 0.08-5 [11.8 kB]
+Get:10 http://deb.debian.org/debian trixie/main amd64 libfile-fcntllock-perl amd64 0.22-4+b4 [34.6 kB]
+Get:11 http://deb.debian.org/debian trixie/main amd64 ri all 1:3.3 [5,192 B]
+Get:12 http://deb.debian.org/debian trixie/main amd64 ruby-full all 1:3.3 [5,132 B]
+Fetched 3,747 kB in 2s (2,274 kB/s)
+Reading changelogs... Done
+(Reading database ... 142892 files and directories currently installed.)
+Preparing to unpack .../dpkg_1.22.22_amd64.deb ...
+Unpacking dpkg (1.22.22) over (1.22.21) ...
+Setting up dpkg (1.22.22) ...
+Selecting previously unselected package libdpkg-perl.
+(Reading database ... 142892 files and directories currently installed.)
+Preparing to unpack .../00-libdpkg-perl_1.22.22_all.deb ...
+Unpacking libdpkg-perl (1.22.22) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../01-dpkg-dev_1.22.22_all.deb ...
+Unpacking dpkg-dev (1.22.22) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../02-build-essential_12.12_amd64.deb ...
+Unpacking build-essential (12.12) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../03-libfakeroot_1.37.1.1-1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.37.1.1-1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../04-fakeroot_1.37.1.1-1_amd64.deb ...
+Unpacking fakeroot (1.37.1.1-1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../05-libalgorithm-diff-perl_1.201-1_all.deb ...
+Unpacking libalgorithm-diff-perl (1.201-1) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack .../06-libalgorithm-diff-xs-perl_0.04-9_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl (0.04-9) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../07-libalgorithm-merge-perl_0.08-5_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-5) ...
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack .../08-libfile-fcntllock-perl_0.22-4+b4_amd64.deb ...
+Unpacking libfile-fcntllock-perl (0.22-4+b4) ...
+Selecting previously unselected package ri.
+Preparing to unpack .../09-ri_1%3a3.3_all.deb ...
+Unpacking ri (1:3.3) ...
+Selecting previously unselected package ruby-full.
+Preparing to unpack .../10-ruby-full_1%3a3.3_all.deb ...
+Unpacking ruby-full (1:3.3) ...
+Setting up libfile-fcntllock-perl (0.22-4+b4) ...
+Setting up libalgorithm-diff-perl (1.201-1) ...
+Setting up ri (1:3.3) ...
+Setting up libfakeroot:amd64 (1.37.1.1-1) ...
+Setting up fakeroot (1.37.1.1-1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up libdpkg-perl (1.22.22) ...
+Setting up ruby-full (1:3.3) ...
+Setting up libalgorithm-diff-xs-perl (0.04-9) ...
+Setting up libalgorithm-merge-perl (0.08-5) ...
+Setting up dpkg-dev (1.22.22) ...
+Setting up build-essential (12.12) ...
+Processing triggers for man-db (2.13.1-1) ...
+Processing triggers for libc-bin (2.41-12+deb13u2) ...
+
+$ gem install travis --user-install
+Fetching net-http-pipeline-1.0.1.gem
+Fetching connection_pool-3.0.2.gem
+Fetching net-http-persistent-4.0.8.gem
+Fetching multi_json-1.21.1.gem
+Fetching ffi-1.17.4-x86_64-linux-gnu.gem
+Fetching ethon-0.18.0.gem
+Fetching typhoeus-1.6.0.gem
+Fetching faraday-net_http-3.0.2.gem
+Fetching faraday-2.7.12.gem
+Fetching faraday-typhoeus-2.0.0.gem
+Fetching faraday-retry-2.4.0.gem
+Fetching public_suffix-7.0.5.gem
+Fetching addressable-2.9.0.gem
+Fetching concurrent-ruby-1.3.6.gem
+Fetching tzinfo-2.0.6.gem
+Fetching prism-1.9.0.gem
+Fetching minitest-6.0.6.gem
+Fetching i18n-1.14.8.gem
+Fetching activesupport-7.0.10.gem
+Fetching travis-gh-0.21.0.gem
+Fetching rack-3.2.6.gem
+Fetching rack-test-2.1.0.gem
+Fetching websocket-1.2.11.gem
+Fetching pusher-client-0.6.2.gem
+Fetching travis-1.14.0.gem
+Fetching launchy-2.5.2.gem
+Fetching json_pure-2.6.3.gem
+Fetching highline-2.1.0.gem
+Fetching faraday-rack-2.1.3.gem
+Successfully installed net-http-pipeline-1.0.1
+Successfully installed connection_pool-3.0.2
+Successfully installed net-http-persistent-4.0.8
+Successfully installed multi_json-1.21.1
+Successfully installed ffi-1.17.4-x86_64-linux-gnu
+Successfully installed ethon-0.18.0
+Successfully installed typhoeus-1.6.0
+Successfully installed faraday-net_http-3.0.2
+Successfully installed faraday-2.7.12
+Successfully installed faraday-typhoeus-2.0.0
+Successfully installed faraday-retry-2.4.0
+Successfully installed public_suffix-7.0.5
+Successfully installed addressable-2.9.0
+Successfully installed concurrent-ruby-1.3.6
+Successfully installed tzinfo-2.0.6
+Building native extensions. This could take a while...
+Successfully installed prism-1.9.0
+WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
+          gem executables (minitest) will not run.
+Successfully installed minitest-6.0.6
+Successfully installed i18n-1.14.8
+Successfully installed activesupport-7.0.10
+Successfully installed travis-gh-0.21.0
+Successfully installed rack-3.2.6
+Successfully installed rack-test-2.1.0
+Successfully installed websocket-1.2.11
+Successfully installed pusher-client-0.6.2
+WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
+          gem executables (launchy) will not run.
+Successfully installed launchy-2.5.2
+Successfully installed json_pure-2.6.3
+Successfully installed highline-2.1.0
+Successfully installed faraday-rack-2.1.3
+WARNING:  You don't have /home/vlad/.local/share/gem/ruby/3.3.0/bin in your PATH,
+          gem executables (travis) will not run.
+Successfully installed travis-1.14.0
+Parsing documentation for net-http-pipeline-1.0.1
+Installing ri documentation for net-http-pipeline-1.0.1
+Parsing documentation for connection_pool-3.0.2
+Installing ri documentation for connection_pool-3.0.2
+Parsing documentation for net-http-persistent-4.0.8
+Installing ri documentation for net-http-persistent-4.0.8
+Parsing documentation for multi_json-1.21.1
+Installing ri documentation for multi_json-1.21.1
+Parsing documentation for ffi-1.17.4-x86_64-linux-gnu
+Installing ri documentation for ffi-1.17.4-x86_64-linux-gnu
+Parsing documentation for ethon-0.18.0
+Installing ri documentation for ethon-0.18.0
+Parsing documentation for typhoeus-1.6.0
+Installing ri documentation for typhoeus-1.6.0
+Parsing documentation for faraday-net_http-3.0.2
+Installing ri documentation for faraday-net_http-3.0.2
+Parsing documentation for faraday-2.7.12
+Installing ri documentation for faraday-2.7.12
+Parsing documentation for faraday-typhoeus-2.0.0
+Installing ri documentation for faraday-typhoeus-2.0.0
+Parsing documentation for faraday-retry-2.4.0
+Installing ri documentation for faraday-retry-2.4.0
+Parsing documentation for public_suffix-7.0.5
+Installing ri documentation for public_suffix-7.0.5
+Parsing documentation for addressable-2.9.0
+Installing ri documentation for addressable-2.9.0
+Parsing documentation for concurrent-ruby-1.3.6
+Installing ri documentation for concurrent-ruby-1.3.6
+Parsing documentation for tzinfo-2.0.6
+Installing ri documentation for tzinfo-2.0.6
+Parsing documentation for prism-1.9.0
+Installing ri documentation for prism-1.9.0
+Parsing documentation for minitest-6.0.6
+Installing ri documentation for minitest-6.0.6
+Parsing documentation for i18n-1.14.8
+Installing ri documentation for i18n-1.14.8
+Parsing documentation for activesupport-7.0.10
+Installing ri documentation for activesupport-7.0.10
+Parsing documentation for travis-gh-0.21.0
+Installing ri documentation for travis-gh-0.21.0
+Parsing documentation for rack-3.2.6
+Installing ri documentation for rack-3.2.6
+Parsing documentation for rack-test-2.1.0
+Installing ri documentation for rack-test-2.1.0
+Parsing documentation for websocket-1.2.11
+Installing ri documentation for websocket-1.2.11
+Parsing documentation for pusher-client-0.6.2
+Installing ri documentation for pusher-client-0.6.2
+Parsing documentation for launchy-2.5.2
+Installing ri documentation for launchy-2.5.2
+Parsing documentation for json_pure-2.6.3
+Installing ri documentation for json_pure-2.6.3
+Parsing documentation for highline-2.1.0
+Installing ri documentation for highline-2.1.0
+Parsing documentation for faraday-rack-2.1.3
+Installing ri documentation for faraday-rack-2.1.3
+Parsing documentation for travis-1.14.0
+Installing ri documentation for travis-1.14.0
+Done installing documentation for net-http-pipeline, connection_pool, net-http-persistent, multi_json, ffi, ethon, typhoeus, faraday-net_http, faraday, faraday-typhoeus, faraday-retry, public_suffix, addressable, concurrent-ruby, tzinfo, prism, minitest, i18n, activesupport, travis-gh, rack, rack-test, websocket, pusher-client, launchy, json_pure, highline, faraday-rack, travis after 66 seconds
+29 gems installed
+```
+
+Клонируем предыдущую работу (lab03) как основу для lab04:
+```bash
+$ git clone https://github.com/${GITHU
+B_USERNAME}/lab03- projects/lab04
+Cloning into 'projects/lab04'...
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (6/6), 4.44 KiB | 758.00 KiB/s, done.
+
+$ cd projects/lab04
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab03.git
-$ git branch -m main
-$ git push -u origin main
-Username for 'https://github.com': Toray-lab
-Password for 'https://%D0%95%D1%89Toray-lab@github.com':
-remote: Invalid username or token. Password authentication is not supported for Git operations.
-fatal: Authentication failed for 'https://github.com/Toray-lab/lab03.git/'
-git push -u origin main
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04
 ```
-Компиляция без CMake
+
+Создаём файл .travis.yml:
 ```bash
-$ g++ -std=c++11 -I./include -c sources/print.cpp
-$ ls print.o
-print.o
-$ nm print.o | grep print
-0000000000000000 T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSo
-0000000000000026 T _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSt14basic_ofstreamIcS2_E
-$ ar rvs print.a print.o
-ar: creating print.a
-a - print.o
-$ file print.a
-print.a: current ar archive
-$ g++ -std=c++11 -I./include -c examples/example1.cpp
-$ ls example1.o
-example1.o
-$ g++ example1.o print.a -o example1
-$ nm example2.o
-0000000000000000 V DW.ref.__gxx_personality_v0
-                 U __gxx_personality_v0
-0000000000000000 T main
-                 U _Unwind_Resume
-                 U _Z5printRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERSt14basic_ofstreamIcS2_E
-                 U _ZNSt14basic_ofstreamIcSt11char_traitsIcEEC1EPKcSt13_Ios_Openmode
-                 U _ZNSt14basic_ofstreamIcSt11char_traitsIcEED1Ev
-0000000000000000 W _ZNSt15__new_allocatorIcED1Ev
-0000000000000000 W _ZNSt15__new_allocatorIcED2Ev
-0000000000000000 n _ZNSt15__new_allocatorIcED5Ev
-                 U _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEC1EPKcRKS3_
-                 U _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev
-                 U _ZSt21ios_base_library_initv
-0000000000000000 r _ZStL19piecewise_construct
-$ g++ example2.o print.a -o example2
-$ ./example2
-$ cat log.txt && echo
-hello
-$ rm -rf example1.o example2.o print.o print.a example1 example2 log.txt
-```
-Создание CMakeLists.txt
-```bash
-$ cat > CMakeLists.txt <<EOF
-cmake_minimum_required(VERSION 3.4)
-project(print)
+$ cat > .travis.yml <<EOF
+language: cpp
 EOF
+$ cat >> .travis.yml <<EOF
 
-$ cat >> CMakeLists.txt <<EOF
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+script:
+- cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
+- cmake --build _build
+- cmake --build _build --target install
 EOF
+$ cat >> .travis.yml <<EOF
 
-$ cat >> CMakeLists.txt <<EOF
-add_library(print STATIC \${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
-EOF
-
-$ cat >> CMakeLists.txt <<EOF
-include_directories(\${CMAKE_CURRENT_SOURCE_DIR}/include)
+addons:
+  apt:
+    sources:
+      - george-edison55-precise-backports
+    packages:
+      - cmake
+      - cmake-data
 EOF
 ```
-Создание сборки CMake 
+Авторизуемся в Travis CLI и проверяем конфигурацию:
 ```bash
-$ cmake -H. -B_build
-CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 3.10 will be removed from a future version of
-  CMake.
-
-  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-  to tell CMake that the project requires at least <min> but has been updated
-  to work with policies introduced by <max> or earlier.
-
-
--- The C compiler identification is GNU 14.2.0
--- The CXX compiler identification is GNU 14.2.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /usr/bin/cc - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Configuring done (1.4s)
--- Generating done (0.0s)
--- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab03/_build
-$ cmake --build _build
-[ 50%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
-[100%] Linking CXX static library libprint.a
-[100%] Built target print
-ls -la _build/libprint.a
--rw-rw-r-- 1 vlad vlad 2110 Apr 22 17:36 _build/libprint.a
+$ travis login --github-token ${GITHUB_TOKEN}
+Successfully logged in as Toray-lab!
+$ travis lint
+Hooray, .travis.yml looks valid :)
 ```
-Добавление исполняемых файлов в CMakeLists.txt
+Добавляем значок Travis CI в README.md (используем ex для вставки в первую строку):
 ```bash
-$ cat >> CMakeLists.txt <<EOF
-add_executable(example1 \${CMAKE_CURRENT_SOURCE_DIR}/examples/example1.cpp)
-add_executable(example2 \${CMAKE_CURRENT_SOURCE_DIR}/examples/example2.cpp)
-EOF
-
-$ cat >> CMakeLists.txt <<EOF
-target_link_libraries(example1 print)
-target_link_libraries(example2 print)
-EOF
+$ ex -sc '1i|[![Build Status](https://travis-ci.org/'${GITHUB_USERNAME}'/lab04.svg?branch=master)](https://travis-ci.org/'${GITHUB_USERNAME}'/lab04)' -cx README.md
 ```
-Пересборка всех целе  
+
+Коммитим изменения и пушим:
 ```bash
-$ cmake --build _build
-CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 3.10 will be removed from a future version of
-  CMake.
-
-  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-  to tell CMake that the project requires at least <min> but has been updated
-  to work with policies introduced by <max> or earlier.
-
-
--- Configuring done (0.0s)
--- Generating done (0.0s)
--- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab03/_build
-[ 33%] Built target print
-[ 50%] Building CXX object CMakeFiles/example1.dir/examples/example1.cpp.o
-[ 66%] Linking CXX executable example1
-[ 66%] Built target example1
-[ 83%] Building CXX object CMakeFiles/example2.dir/examples/example2.cpp.o
-[100%] Linking CXX executable example2
-[100%] Built target example2
-$ cmake --build _build --target print
-[100%] Built target print
-$ cmake --build _build --target example1
-[ 50%] Built target print
-[100%] Built target example1
-$ cmake --build _build --target example2
-[ 50%] Built target print
-[100%] Built target example2
-$ cmake --build _build --target print
-[100%] Built target print
-$ cmake --build _build --target example1
-[ 50%] Built target print
-[100%] Built target example1
-$ cmake --build _build --target example2
-[ 50%] Built target print
-[100%] Built target example2
-```
-Запуск собранных примеров
-```bash
-$ _build/example1 && echo
-hello
-$ _build/example2
-$ cat log.txt && echo
-hello
-$ rm -f log.txt
-```
-Установка проекта
-```bash
-$ git clone https://github.com/tp-labs/lab03 tmp
-Cloning into 'tmp'...
-remote: Enumerating objects: 91, done.
-remote: Counting objects: 100% (30/30), done.
-remote: Compressing objects: 100% (9/9), done.
-remote: Total 91 (delta 23), reused 21 (delta 21), pack-reused 61 (from 1)
-Receiving objects: 100% (91/91), 1.02 MiB | 2.71 MiB/s, done.
-Resolving deltas: 100% (41/41), done.
-$ mv -f tmp/CMakeLists.txt .
-$ rm -rf tmp
-$ cat CMakeLists.txt
-cmake_minimum_required(VERSION 3.4)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-option(BUILD_EXAMPLES "Build examples" OFF)
-
-project(print)
-
-add_library(print STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
-
-target_include_directories(print PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-
-if(BUILD_EXAMPLES)
-  file(GLOB EXAMPLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp")
-  foreach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
-    get_filename_component(EXAMPLE_NAME ${EXAMPLE_SOURCE} NAME_WE)
-    add_executable(${EXAMPLE_NAME} ${EXAMPLE_SOURCE})
-    target_link_libraries(${EXAMPLE_NAME} print)
-    install(TARGETS ${EXAMPLE_NAME}
-      RUNTIME DESTINATION bin
-    )
-  endforeach(EXAMPLE_SOURCE ${EXAMPLE_SOURCES})
-endif()
-
-install(TARGETS print
-    EXPORT print-config
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-)
-
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION include)
-install(EXPORT print-config DESTINATION cmake)
-```
-Соберём установку в папку _install
-```bash
-$ cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
-CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
-  Compatibility with CMake < 3.10 will be removed from a future version of
-  CMake.
-
-  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
-  to tell CMake that the project requires at least <min> but has been updated
-  to work with policies introduced by <max> or earlier.
-
-
--- Configuring done (0.0s)
--- Generating done (0.0s)
--- Build files have been written to: /home/vlad/Toray-lab/workspace/projects/lab03/_build
-$ cmake --build _build --target install
-[100%] Built target print
-Install the project...
--- Install configuration: ""
--- Installing: /home/vlad/Toray-lab/workspace/projects/lab03/_install/lib/libprint.a
--- Installing: /home/vlad/Toray-lab/workspace/projects/lab03/_install/include
--- Installing: /home/vlad/Toray-lab/workspace/projects/lab03/_install/include/print.hpp
--- Installing: /home/vlad/Toray-lab/workspace/projects/lab03/_install/cmake/print-config.cmake
--- Installing: /home/vlad/Toray-lab/workspace/projects/lab03/_install/cmake/print-config-noconfig.cmake
-$ tree _install
-_install
-├── cmake
-│   ├── print-config.cmake
-│   └── print-config-noconfig.cmake
-├── include
-│   └── print.hpp
-└── lib
-    └── libprint.a
-
-4 directories, 4 files
-```
-Фиксируем изменения в git
-```bash
-$ git add CMakeLists.txt
-$ git commit -m "added CMakeLists.txt with install"
-[main 075dd30] added CMakeLists.txt with install
- 1 file changed, 36 insertions(+)
- create mode 100644 CMakeLists.txt
+$ git add .travis.yml README.md
+$ git commit -m "added CI"
+[main ce86d18] added CI
+ 2 files changed, 8 insertions(+)
+ create mode 100644 .travis.yml
 $ git push origin main
+```
+
+Проверяем Travis CI:
+```bash
+$ travis lint
+Hooray, .travis.yml looks valid :)
+```
+
+Просматриваем аккаунты, синхронизируем и включаем репозиторий:
+```bash
+$ travis accounts
+Toray-lab (Toray-lab): not subscribed, 20 repositories
+To set up a subscription, please visit app.travis-ci.com.
+$ travis sync
+synchronizing: . done
+$ travis repos
+Toray-lab/DZ2 /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:334:in `format': wrong number of arguments (given 5, expected 1..3) (ArgumentError)
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:315:in `store_error'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:235:in `rescue in execute'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:200:in `execute'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `load'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `<main>'
+/home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:23:in `block in run': can't modify frozen String: "(" (FrozenError)
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:18:in `each'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/repos.rb:18:in `run'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/command.rb:208:in `execute'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli.rb:66:in `run'
+        from /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/bin/travis:21:in `<top (required)>'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `load'
+        from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `<main>'
+$ travis enable
+Toray-lab/lab04: enabled :)
 ```
