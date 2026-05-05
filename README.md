@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
+[![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
+<фрагмент_вставки_значка>
 # Отчёт к лабораторной работе №3
 Настройка окружения
 ```bash
