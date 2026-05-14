@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
-[![Build Status](https://travis-ci.org/Toray-lab/lab04.svg?branch=master)](https://travis-ci.org/Toray-lab/lab04)
+[![Build Status](https://travis-ci.org/Toray-lab/lab05.svg?branch=master)](https://travis-ci.org/Toray-lab/lab05)
+[![Build Status](https://travis-ci.org/Toray-lab/lab05.svg?branch=master)](https://travis-ci.org/Toray-lab/lab05)
 # Отчёт к лабораторной работе №4
 Устанавливаем переменные окрудения
 ```bash
@@ -250,20 +250,20 @@ Done installing documentation for net-http-pipeline, connection_pool, net-http-p
 29 gems installed
 ```
 
-Клонируем предыдущую работу (lab03) как основу для lab04:
+Клонируем предыдущую работу (lab03) как основу для lab05:
 ```bash
 $ git clone https://github.com/${GITHU
-B_USERNAME}/lab03- projects/lab04
-Cloning into 'projects/lab04'...
+B_USERNAME}/lab03- projects/lab05
+Cloning into 'projects/lab05'...
 remote: Enumerating objects: 6, done.
 remote: Counting objects: 100% (6/6), done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
 Receiving objects: 100% (6/6), 4.44 KiB | 758.00 KiB/s, done.
 
-$ cd projects/lab04
+$ cd projects/lab05
 $ git remote remove origin
-$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04
+$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab05
 ```
 
 Создаём файл .travis.yml:
@@ -298,7 +298,7 @@ Hooray, .travis.yml looks valid :)
 ```
 Добавляем значок Travis CI в README.md (используем ex для вставки в первую строку):
 ```bash
-$ ex -sc '1i|[![Build Status](https://travis-ci.org/'${GITHUB_USERNAME}'/lab04.svg?branch=master)](https://travis-ci.org/'${GITHUB_USERNAME}'/lab04)' -cx README.md
+$ ex -sc '1i|[![Build Status](https://travis-ci.org/'${GITHUB_USERNAME}'/lab05.svg?branch=master)](https://travis-ci.org/'${GITHUB_USERNAME}'/lab05)' -cx README.md
 ```
 
 Коммитим изменения и пушим:
@@ -342,5 +342,5 @@ Toray-lab/DZ2 /home/vlad/.rvm/gems/ruby-2.4.2/gems/travis-1.14.0/lib/travis/cli/
         from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `load'
         from /home/vlad/.local/share/gem/ruby/3.3.0/bin/travis:25:in `<main>'
 $ travis enable
-Toray-lab/lab04: enabled :)
+Toray-lab/lab05: enabled :)
 ```
