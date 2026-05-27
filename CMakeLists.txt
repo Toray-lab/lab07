@@ -1,5 +1,10 @@
-
 cmake_minimum_required(VERSION 3.10)
+
+include("cmake/HunterGate.cmake")
+HunterGate(
+    URL "https://github.com/cpp-pm/hunter/archive/v0.23.251.tar.gz"
+    SHA1 "5659b15dc0884d4b03dbd95710e6a1fa0fc3258d"
+)
 
 project(print)
 
@@ -24,21 +29,12 @@ target_include_directories(print PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
 if(BUILD_TESTS)
+    hunter_add_package(GTest)
+    find_package(GTest CONFIG REQUIRED)
 
-  enable_testing()
-
-  add_subdirectory(third-party/gtest)
-
-  file(GLOB TEST_SOURCES tests/*.cpp)
-
-  add_executable(check ${TEST_SOURCES})
-
-  target_link_libraries(check print gtest_main)
-
-  target_include_directories(check PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-  add_test(NAME check COMMAND check)
-
+    add_executable(check tests/test1.cpp)
+    target_link_libraries(check PRIVATE print GTest::gtest_main)
+    add_test(NAME check COMMAND check)
 endif()
 
 
